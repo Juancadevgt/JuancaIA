@@ -325,8 +325,9 @@
       var prefijo   = esUrgente ? "URGENTE - " : "";
       // Servicio elegido en la lista desplegable (si hay)
       var svc       = servicio.value ? " Me interesa: " + servicio.value + "." : "";
-      // Código de referido (si vino por un link ?ref=)
-      var ref       = window.JC_REF ? " (Referido por: " + window.JC_REF + ")" : "";
+      // Código de referido (si vino por un link ?ref=). Se muestra como
+      // "O#CODIGO" para que parezca un número de orden y no lo borren.
+      var ref       = window.JC_REF ? " O#" + window.JC_REF : "";
 
       // WhatsApp: prefija URGENTE y adjunta el servicio elegido
       var textoWa = prefijo + waBase + svc + ref;
@@ -461,7 +462,7 @@
       partes.push("Hola Juan, vengo de tu página web.");
       if (lead.need) partes.push("Me interesa: " + lead.need + ".");
       if (lead.problem) partes.push('Mi caso: "' + lead.problem + '".');
-      if (window.JC_REF) partes.push("(Referido por: " + window.JC_REF + ")");
+      if (window.JC_REF) partes.push("O#" + window.JC_REF);
       return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(partes.join(" "));
     }
 
