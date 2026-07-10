@@ -99,6 +99,39 @@
     .contact-wrap{grid-template-columns:1fr}
     .nav-links{display:none}
   }
+
+  /* ===== JuancaBot (chatbot) ===== */
+  .bot-launcher{position:fixed;bottom:24px;right:24px;width:62px;height:62px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(0,0,0,.45);z-index:70;cursor:pointer;border:none;transition:transform .15s}
+  .bot-launcher:hover{transform:scale(1.08)}
+  .bot-launcher svg{width:32px;height:32px;fill:#fff}
+  .bot-launcher .badge{position:absolute;top:-2px;right:-2px;background:#ef4444;color:#fff;font-size:.72rem;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+
+  .bot-panel{position:fixed;bottom:98px;right:24px;width:360px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 130px);background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.5);z-index:70;display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(20px) scale(.96);pointer-events:none;transition:opacity .2s,transform .2s}
+  .bot-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+  .bot-header{display:flex;align-items:center;gap:12px;padding:15px 18px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04202a}
+  .bot-header .bot-ava{width:40px;height:40px;border-radius:50%;background:rgba(4,32,42,.15);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+  .bot-header h4{font-size:1rem;font-weight:800;line-height:1.2}
+  .bot-header small{display:flex;align-items:center;gap:6px;font-size:.78rem;opacity:.9;font-weight:600}
+  .bot-header small::before{content:"";width:8px;height:8px;border-radius:50%;background:#0a7d33}
+  .bot-header .bot-close{margin-left:auto;background:none;border:none;color:#04202a;font-size:1.6rem;cursor:pointer;line-height:1;opacity:.7;padding:0}
+  .bot-header .bot-close:hover{opacity:1}
+
+  .bot-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;background:var(--bg)}
+  .bot-msg{max-width:82%;padding:10px 14px;border-radius:14px;font-size:.92rem;line-height:1.5;white-space:pre-line}
+  .bot-msg.bot{background:var(--card);border:1px solid rgba(255,255,255,.08);border-bottom-left-radius:4px;align-self:flex-start}
+  .bot-msg.user{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04202a;font-weight:600;border-bottom-right-radius:4px;align-self:flex-end}
+  .bot-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px;background:var(--bg)}
+  .bot-chip{background:rgba(34,211,238,.1);border:1px solid var(--accent);color:var(--accent);padding:8px 14px;border-radius:999px;font-size:.85rem;cursor:pointer;transition:background .15s;font-family:inherit}
+  .bot-chip:hover{background:rgba(34,211,238,.2)}
+  .bot-chip.wa{background:#25d366;border-color:#25d366;color:#04202a;font-weight:700}
+  .bot-input{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(255,255,255,.08);background:var(--card)}
+  .bot-input input{flex:1;margin:0;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:var(--bg);color:var(--text);font-size:.9rem}
+  .bot-input button{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:#04202a;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:1.05rem;flex-shrink:0;font-weight:700}
+  .bot-typing span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--muted);animation:botblink 1.2s infinite}
+  .bot-typing span:nth-child(2){animation-delay:.2s}
+  .bot-typing span:nth-child(3){animation-delay:.4s}
+  @keyframes botblink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+  @media(max-width:480px){.bot-panel{bottom:90px;right:12px;left:12px;width:auto;height:72vh}}
 </style>
 </head>
 <body>
@@ -122,7 +155,7 @@
       <h1>Soy Juan Carlos Jimenez.<br>Convierto tus <em>datos y sistemas</em> en resultados.</h1>
       <p class="subtitle">Ingeniero en Sistemas especializado en <strong>inteligencia artificial</strong>. Desarrollo de software a la medida, análisis de datos y soporte técnico para que tu negocio funcione mejor.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://wa.me/50233583414?text=Hola%20Juan,%20me%20interesa%20cotizar%20un%20sistema" target="_blank">💬 Escríbeme por WhatsApp</a>
+        <a class="btn btn-primary" href="https://wa.me/50233583414?text=Hola%20Juan,%20me%20interesa%20cotizar%20un%20sistema" target="_blank">💬 CONTACTO RÁPIDO: WHATSAPP</a>
         <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
       </div>
       <div class="stats">
@@ -219,7 +252,28 @@
   <div class="container">© 2026 JuancaDev · Hecho con 💙</div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/50233583414" target="_blank" aria-label="WhatsApp">💬</a>
+<!-- JuancaBot -->
+<button class="bot-launcher" id="botLauncher" aria-label="Abrir JuancaBot">
+  <span class="badge" id="botBadge">1</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.38-1 1.72V7h3a4 4 0 0 1 4 4v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1H3a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1v-1a4 4 0 0 1 4-4h3V5.72A2 2 0 0 1 10 4a2 2 0 0 1 2-2zM9 12a1.5 1.5 0 0 0 0 3 1.5 1.5 0 0 0 0-3zm6 0a1.5 1.5 0 0 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+</button>
+
+<div class="bot-panel" id="botPanel" role="dialog" aria-label="JuancaBot">
+  <div class="bot-header">
+    <div class="bot-ava">🤖</div>
+    <div>
+      <h4>JuancaBot</h4>
+      <small>Asistente de JuancaDev · En línea</small>
+    </div>
+    <button class="bot-close" id="botClose" aria-label="Cerrar">&times;</button>
+  </div>
+  <div class="bot-body" id="botBody"></div>
+  <div class="bot-chips" id="botChips"></div>
+  <form class="bot-input" id="botForm">
+    <input id="botText" type="text" placeholder="Escribe tu mensaje..." autocomplete="off">
+    <button type="submit" aria-label="Enviar">➤</button>
+  </form>
+</div>
 
 <script>
   (function(){
@@ -234,7 +288,6 @@
     var urgente  = document.getElementById("urgente");
     var linkWa   = document.getElementById("link-wa");
     var linkMail = document.getElementById("link-mail");
-    var waFloat  = document.querySelector(".wa-float");
 
     function actualizar(){
       var esUrgente = urgente.checked;
@@ -244,7 +297,6 @@
       var textoWa = encodeURIComponent(prefijo + waBase);
       var urlWa   = "https://wa.me/" + WA_NUMBER + "?text=" + textoWa;
       linkWa.href = urlWa;
-      if (waFloat) waFloat.href = urlWa;
 
       // Correo: asunto automático; si es urgente empieza con URGENTE
       linkMail.href = "mailto:" + EMAIL +
@@ -254,6 +306,153 @@
 
     urgente.addEventListener("change", actualizar);
     actualizar();
+  })();
+
+  // ===== JuancaBot: chatbot guiado (demo, sin backend) =====
+  (function(){
+    var WA_NUMBER = "50233583414";
+    var launcher = document.getElementById("botLauncher");
+    var panel    = document.getElementById("botPanel");
+    var closeBtn = document.getElementById("botClose");
+    var body     = document.getElementById("botBody");
+    var chipsBox = document.getElementById("botChips");
+    var form     = document.getElementById("botForm");
+    var input    = document.getElementById("botText");
+    var badge    = document.getElementById("botBadge");
+    var started  = false;
+    var lead     = { need:null, urgent:false };
+
+    function scrollDown(){ body.scrollTop = body.scrollHeight; }
+
+    function addMsg(text, who){
+      var d = document.createElement("div");
+      d.className = "bot-msg " + who;
+      d.textContent = text;
+      body.appendChild(d);
+      scrollDown();
+    }
+
+    function botSay(text, cb){
+      var t = document.createElement("div");
+      t.className = "bot-msg bot bot-typing";
+      t.innerHTML = "<span></span><span></span><span></span>";
+      body.appendChild(t); scrollDown();
+      setTimeout(function(){
+        t.remove();
+        addMsg(text, "bot");
+        if (cb) cb();
+      }, 650);
+    }
+
+    function setChips(list){
+      chipsBox.innerHTML = "";
+      list.forEach(function(c){
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "bot-chip" + (c.wa ? " wa" : "");
+        b.textContent = c.label;
+        b.addEventListener("click", c.action);
+        chipsBox.appendChild(b);
+      });
+    }
+
+    function menuChips(){
+      setChips([
+        {label:"🤖 Servicios",          action:function(){ handle("servicios"); }},
+        {label:"🧭 ¿Cómo trabaja?",     action:function(){ handle("proceso"); }},
+        {label:"⏱️ Tiempos y precios",  action:function(){ handle("precios"); }},
+        {label:"💬 Quiero contactarlo", action:function(){ handle("contacto"); }}
+      ]);
+    }
+
+    var respuestas = {
+      servicios: "Juan Carlos ofrece 5 servicios:\n\n🤖 Inteligencia Artificial (su especialidad)\n📊 Análisis de datos y dashboards\n💻 Desarrollo de software a la medida\n🛠️ Soporte técnico\n🧭 Consultoría en sistemas\n\n😉 De hecho, este mismo chat es un ejemplo de lo que puede crear para tu negocio.",
+      proceso:   "Trabaja en 4 pasos simples:\n\n1️⃣ Platicamos tu necesidad (sin costo)\n2️⃣ Te envía propuesta clara con precio fijo\n3️⃣ Desarrolla con avances constantes\n4️⃣ Entrega funcionando, con capacitación y soporte",
+      precios:   "Cada proyecto se cotiza a la medida, con precio fijo y sin sorpresas. La primera plática y la cotización son gratis, y Juan responde en menos de 24 horas hábiles. 🚀"
+    };
+
+    function handle(intent){
+      if (intent === "servicios"){ addMsg("Servicios", "user");        botSay(respuestas.servicios, menuChips); return; }
+      if (intent === "proceso"){   addMsg("¿Cómo trabaja?", "user");    botSay(respuestas.proceso, menuChips);   return; }
+      if (intent === "precios"){   addMsg("Tiempos y precios", "user"); botSay(respuestas.precios, menuChips);   return; }
+      if (intent === "contacto"){  addMsg("Quiero contactarlo", "user"); startContacto(); return; }
+    }
+
+    function startContacto(){
+      botSay("¡Genial! Para conectarte con Juan por WhatsApp, cuéntame: ¿qué necesitas?", function(){
+        setChips([
+          {label:"🤖 Inteligencia Artificial", action:function(){ pickNeed("Inteligencia Artificial"); }},
+          {label:"📊 Análisis de datos",        action:function(){ pickNeed("Análisis de datos"); }},
+          {label:"💻 Software a la medida",     action:function(){ pickNeed("Desarrollo de software"); }},
+          {label:"🛠️ Soporte técnico",         action:function(){ pickNeed("Soporte técnico"); }},
+          {label:"🧭 Consultoría / Otro",       action:function(){ pickNeed("Consultoría en sistemas"); }}
+        ]);
+      });
+    }
+
+    function pickNeed(n){
+      lead.need = n;
+      addMsg(n, "user");
+      botSay("Entendido 👍 ¿Tu solicitud es urgente?", function(){
+        setChips([
+          {label:"🚨 Sí, es urgente",  action:function(){ pickUrgent(true); }},
+          {label:"🙂 No, con calma",   action:function(){ pickUrgent(false); }}
+        ]);
+      });
+    }
+
+    function pickUrgent(u){
+      lead.urgent = u;
+      addMsg(u ? "Sí, es urgente" : "No, con calma", "user");
+      botSay("¡Perfecto! Toca el botón y te llevo a WhatsApp con tu mensaje listo. Juan te responde personalmente 👇", function(){
+        setChips([
+          {label:"💬 Abrir WhatsApp", wa:true, action:function(){ window.open(waLink(), "_blank"); }},
+          {label:"↩️ Volver al menú",         action:function(){ botSay("¿Algo más en que te ayude?", menuChips); }}
+        ]);
+      });
+    }
+
+    function waLink(){
+      var partes = [];
+      if (lead.urgent) partes.push("URGENTE -");
+      partes.push("Hola Juan, vengo de tu página web.");
+      if (lead.need) partes.push("Me interesa: " + lead.need + ".");
+      return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(partes.join(" "));
+    }
+
+    function freeText(txt){
+      addMsg(txt, "user");
+      var t = txt.toLowerCase();
+      if (/(hola|buenas|saludos|hey|qué tal|que tal)/.test(t))                           { botSay("¡Hola! 👋 ¿En qué te ayudo?", menuChips); return; }
+      if (/(precio|costo|cuánto|cuanto|cotiz|tarifa|tiempo|cuándo|cuando)/.test(t))       { botSay(respuestas.precios, menuChips); return; }
+      if (/(whatsapp|contact|hablar|llamar|correo|email|escribir)/.test(t))              { startContacto(); return; }
+      if (/(proceso|cómo trabaj|como trabaj|pasos|garant)/.test(t))                      { botSay(respuestas.proceso, menuChips); return; }
+      if (/(servicio|hace|ofrec|\bia\b|inteligencia|dato|software|soporte|app|sistema|web|p[aá]gina|dashboard)/.test(t)){ botSay(respuestas.servicios, menuChips); return; }
+      botSay("Buena pregunta. Para darte una respuesta exacta, lo mejor es hablar directo con Juan. Mientras, elige una opción 👇", menuChips);
+    }
+
+    function start(){
+      if (started) return;
+      started = true;
+      botSay("¡Hola! 👋 Soy JuancaBot, el asistente virtual de JuancaDev.", function(){
+        botSay("Estoy aquí para contarte cómo Juan Carlos puede ayudar a tu negocio. ¿Qué te gustaría saber?", menuChips);
+      });
+    }
+
+    function toggle(open){
+      if (open){ panel.classList.add("open"); badge.style.display = "none"; start(); setTimeout(function(){ input.focus(); }, 250); }
+      else { panel.classList.remove("open"); }
+    }
+
+    launcher.addEventListener("click", function(){ toggle(!panel.classList.contains("open")); });
+    closeBtn.addEventListener("click", function(){ toggle(false); });
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      var v = input.value.trim();
+      if (!v) return;
+      input.value = "";
+      freeText(v);
+    });
   })();
 </script>
 
