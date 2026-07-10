@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imagen de marketing · JuancaDev</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#060b16;color:#e6edf7;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;gap:20px;padding:24px}
+  h1{font-size:1.1rem;font-weight:600;color:#93a3bd;text-align:center}
+  #art{width:100%;max-width:420px;border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .btn{background:linear-gradient(90deg,#22d3ee,#34d399);color:#04202a;border:none;font-weight:800;font-size:1.05rem;padding:14px 30px;border-radius:999px;cursor:pointer;box-shadow:0 8px 24px rgba(34,211,238,.35)}
+  .btn:active{transform:translateY(1px)}
+  .hint{font-size:.85rem;color:#93a3bd;text-align:center;max-width:420px}
+</style>
+</head>
+<body>
+  <h1>Vista previa — toca el botón para descargar la imagen</h1>
+
+  <div id="art">
+    <svg id="poster" viewBox="0 0 600 760" xmlns="http://www.w3.org/2000/svg" width="100%">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#0b1220"/>
+          <stop offset="1" stop-color="#0f1a30"/>
+        </linearGradient>
+        <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#22d3ee"/>
+          <stop offset="1" stop-color="#34d399"/>
+        </linearGradient>
+        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f6dd82"/>
+          <stop offset="1" stop-color="#d9a832"/>
+        </linearGradient>
+        <radialGradient id="glow" cx="0.68" cy="0.12" r="0.7">
+          <stop offset="0" stop-color="#22d3ee" stop-opacity="0.28"/>
+          <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+        </radialGradient>
+        <pattern id="net" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M0 0 L20 20 M20 0 L0 20" stroke="#ffffff" stroke-width="1"/>
+        </pattern>
+      </defs>
+
+      <rect width="600" height="760" fill="url(#bg)"/>
+      <rect width="600" height="760" fill="url(#glow)"/>
+
+      <!-- brand -->
+      <text x="40" y="52" font-family="Segoe UI, system-ui, sans-serif" font-size="26" font-weight="800" fill="#e6edf7">Juanca<tspan fill="#22d3ee">Dev</tspan></text>
+
+      <!-- headline -->
+      <g font-family="Segoe UI, system-ui, sans-serif" font-weight="900" text-anchor="middle">
+        <text x="300" y="118" font-size="46" fill="#e6edf7">¡MÉTELE <tspan fill="url(#acc)">GOL</tspan></text>
+        <text x="300" y="162" font-size="33" fill="#e6edf7">A TU COMPETENCIA!</text>
+      </g>
+      <rect x="238" y="130" width="124" height="5" rx="2" fill="url(#acc)"/>
+
+      <!-- GOAL (top-right) -->
+      <g>
+        <rect x="398" y="196" width="182" height="150" fill="url(#net)" opacity="0.12"/>
+        <path d="M398,196 L580,196 L580,346" fill="none" stroke="#eaf1fb" stroke-width="6" stroke-linejoin="round"/>
+        <line x1="398" y1="196" x2="398" y2="346" stroke="#eaf1fb" stroke-width="6"/>
+        <line x1="398" y1="346" x2="580" y2="346" stroke="#eaf1fb" stroke-width="4" opacity="0.5"/>
+        <!-- ball in the net (GOL) -->
+        <circle cx="500" cy="262" r="25" fill="#ffffff"/>
+        <circle cx="500" cy="262" r="25" fill="none" stroke="#c9d3e6" stroke-width="1.5"/>
+        <polygon points="500,250 510.9,257.9 506.7,270.6 493.3,270.6 489.1,257.9" fill="#111a2e"/>
+        <path d="M500,250 L500,237 M510.9,257.9 L524,252 M506.7,270.6 L515,283 M493.3,270.6 L485,283 M489.1,257.9 L476,252" stroke="#111a2e" stroke-width="2"/>
+      </g>
+
+      <!-- motion trail foot -> goal -->
+      <path d="M362,470 Q430,330 486,282" fill="none" stroke="url(#acc)" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 14" opacity="0.9"/>
+
+      <!-- speed lines behind player -->
+      <g stroke="url(#acc)" stroke-width="5" stroke-linecap="round" opacity="0.35">
+        <line x1="150" y1="360" x2="104" y2="356"/>
+        <line x1="150" y1="386" x2="92" y2="386"/>
+        <line x1="150" y1="412" x2="106" y2="416"/>
+      </g>
+
+      <!-- PLAYER (side view, kicking) -->
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <!-- back (planted) leg -->
+        <path d="M244,452 L232,500 L224,548" fill="none" stroke="#eab892" stroke-width="18"/>
+        <ellipse cx="219" cy="551" rx="15" ry="8" fill="#12203a" transform="rotate(-12 219 551)"/>
+        <!-- kicking leg (extended forward) -->
+        <path d="M262,452 L320,462 L376,468" fill="none" stroke="#eab892" stroke-width="18"/>
+        <ellipse cx="382" cy="468" rx="16" ry="8" fill="#12203a" transform="rotate(8 382 468)"/>
+        <!-- shorts -->
+        <path d="M230,414 L272,414 L276,452 L226,452 Z" fill="#0f1a30"/>
+        <!-- torso / jersey -->
+        <path d="M224,330 Q219,374 233,418 L270,418 Q278,372 266,328 Q254,318 242,320 Q230,322 224,330 Z" fill="#22d3ee"/>
+        <path d="M233,418 L270,418 L268,406 L235,406 Z" fill="#1ba8bf"/>
+        <!-- back arm (swung back) -->
+        <path d="M242,344 L204,330 L186,342" fill="none" stroke="#eab892" stroke-width="12"/>
+        <!-- front arm (forward for balance) -->
+        <path d="M250,346 L292,360 L318,350" fill="none" stroke="#eab892" stroke-width="12"/>
+        <!-- head -->
+        <circle cx="236" cy="300" r="30" fill="#eab892"/>
+        <!-- nose -->
+        <path d="M264,296 q8,4 0,9" fill="#eab892"/>
+        <!-- blonde hair: cap + flowing locks -->
+        <path d="M214,292 Q210,266 236,262 Q262,262 262,288 Q252,274 234,277 Q220,279 216,297 Z" fill="url(#gold)"/>
+        <path d="M216,286 C190,286 176,304 186,322 C192,332 210,326 217,314 Z" fill="url(#gold)"/>
+        <path d="M220,302 C198,308 186,322 192,336 C197,346 212,340 219,330 Z" fill="url(#gold)"/>
+        <path d="M224,315 C206,323 197,335 202,347 C206,356 217,351 223,343 Z" fill="url(#gold)"/>
+        <!-- headband -->
+        <path d="M215,292 Q236,283 258,289" fill="none" stroke="url(#acc)" stroke-width="7" stroke-linecap="round"/>
+        <!-- eye -->
+        <circle cx="248" cy="296" r="3.4" fill="#2a2018"/>
+      </g>
+
+      <!-- subline (juego de palabras: Haaland = jalan) -->
+      <g font-family="Segoe UI, system-ui, sans-serif" text-anchor="middle" font-weight="800">
+        <text x="300" y="624" font-size="22" fill="#e6edf7">¿Quiénes <tspan fill="url(#gold)">Haaland</tspan> a crear</text>
+        <text x="300" y="656" font-size="22" fill="#e6edf7">su sistema con <tspan fill="#22d3ee">JuancaDev</tspan>?</text>
+      </g>
+
+      <!-- CTA -->
+      <g transform="translate(300,704)">
+        <rect x="-145" y="-24" width="290" height="48" rx="24" fill="url(#acc)"/>
+        <text x="0" y="7" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="20" font-weight="800" fill="#04202a">💬 Cotiza por WhatsApp</text>
+      </g>
+      <text x="300" y="746" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="16" font-weight="600" fill="#22d3ee">juancadev-sistemas.vercel.app</text>
+    </svg>
+  </div>
+
+  <button class="btn" id="dl">⬇️ Descargar imagen (PNG)</button>
+  <p class="hint">En el celular: mantén presionada la imagen y elige "Guardar", o usa el botón. En PC: clic en el botón para bajar el PNG en alta resolución.</p>
+
+<script>
+  document.getElementById('dl').addEventListener('click', function(){
+    var svg = document.getElementById('poster');
+    var xml = new XMLSerializer().serializeToString(svg);
+    var svg64 = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(xml)));
+    var img = new Image();
+    img.onload = function(){
+      var scale = 2; // 1200 x 1520 px
+      var canvas = document.createElement('canvas');
+      canvas.width = 600 * scale;
+      canvas.height = 760 * scale;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(function(blob){
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'juancadev-marketing.png';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }, 'image/png');
+    };
+    img.src = svg64;
+  });
+</script>
+</body>
+</html>
