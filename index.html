@@ -158,7 +158,7 @@
       <h1>Soy Juan Carlos Jimenez.<br>Convierto tus <em>datos y sistemas</em> en resultados.</h1>
       <p class="subtitle">Ingeniero en Sistemas especializado en <strong>inteligencia artificial</strong>. Desarrollo de software a la medida, análisis de datos y soporte técnico para que tu negocio funcione mejor.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://wa.me/50233583414?text=Hola%20Juan,%20me%20interesa%20cotizar%20un%20sistema" target="_blank">💬 CONTACTO RÁPIDO: WHATSAPP</a>
+        <a id="link-wa-hero" class="btn btn-primary" href="https://wa.me/50233583414?text=Hola%20Juan,%20me%20interesa%20cotizar%20un%20sistema" target="_blank">💬 CONTACTO RÁPIDO: WHATSAPP</a>
         <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
       </div>
       <div class="stats">
@@ -314,10 +314,11 @@
     var mailSubj = "Contacto desde tu página web";
     var mailBody = "Hola Juan, vengo de tu página web.";
 
-    var urgente   = document.getElementById("urgente");
-    var servicio  = document.getElementById("servicio");
-    var linkWa    = document.getElementById("link-wa");
-    var linkMail  = document.getElementById("link-mail");
+    var urgente    = document.getElementById("urgente");
+    var servicio   = document.getElementById("servicio");
+    var linkWa     = document.getElementById("link-wa");
+    var linkMail   = document.getElementById("link-mail");
+    var linkWaHero = document.getElementById("link-wa-hero");
 
     function actualizar(){
       var esUrgente = urgente.checked;
@@ -330,6 +331,12 @@
       // WhatsApp: prefija URGENTE y adjunta el servicio elegido
       var textoWa = prefijo + waBase + svc + ref;
       linkWa.href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(textoWa);
+
+      // Botón del hero (contacto rápido): mensaje simple + referido
+      if (linkWaHero) {
+        linkWaHero.href = "https://wa.me/" + WA_NUMBER + "?text=" +
+          encodeURIComponent("Hola Juan, me interesa cotizar un sistema." + ref);
+      }
 
       // Correo: asunto con URGENTE si aplica y servicio en el cuerpo
       var asunto = prefijo + mailSubj + (servicio.value ? " - " + servicio.value : "");
