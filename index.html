@@ -420,15 +420,50 @@
       return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(partes.join(" "));
     }
 
+    var svcEmoji = {
+      "Soporte técnico":         "🛠️",
+      "Inteligencia Artificial": "🤖",
+      "Análisis de datos":       "📊",
+      "Desarrollo de software":  "💻",
+      "Consultoría en sistemas": "🧭"
+    };
+
+    // Detecta el servicio adecuado según lo que describe el usuario
+    function detectService(t){
+      // 🛠️ Soporte técnico (problemas / fallas de equipo)
+      if (/(contrase|password|no enciend|no prend|no arranca|no inicia|pantalla azul|virus|malware|lent[oa]|se congela|se traba|se apaga|se reinicia|formate|disco duro|\bdisco\b|\bssd\b|memoria ram|\bram\b|reparar|repara|arreglar|descompuso|da[ñn]ad|no funciona|no sirve|impresora|no imprime|\binternet\b|\bred\b|\bwifi\b|\bwindows\b|instalar|reinstalar|mantenimiento|respaldo|backup|no abre|se borr[oó]|recuperar|error\b)/.test(t)) return "Soporte técnico";
+      // 🤖 Inteligencia Artificial
+      if (/(chatbot|\bbot\b|inteligencia artificial|\bia\b|chatgpt|claude|automatiz|predict|machine learning|modelo de|asistente virtual)/.test(t)) return "Inteligencia Artificial";
+      // 📊 Análisis de datos
+      if (/(dashboard|tablero|reporte|reportes|gr[aá]fic|estad[ií]stic|visualiz|\bkpi\b|indicador|base de datos|analizar (mis )?datos|an[aá]lisis de datos|power bi|m[eé]tricas)/.test(t)) return "Análisis de datos";
+      // 💻 Desarrollo de software
+      if (/(sistema|software|aplicaci[oó]n|\bapp\b|p[aá]gina|sitio web|\bweb\b|inventario|gesti[oó]n|programa|plataforma|ecommerce|tienda en l[ií]nea|\bcrm\b|factura|punto de venta|desarroll|cotizador|agenda|reservas)/.test(t)) return "Desarrollo de software";
+      // 🧭 Consultoría
+      if (/(asesor|consultor|recomiend|qu[eé] tecnolog|no s[eé] qu[eé] necesito|ayuda a elegir|qu[eé] me conviene|orientaci[oó]n|no s[eé] por d[oó]nde)/.test(t)) return "Consultoría en sistemas";
+      return null;
+    }
+
+    function suggestService(service){
+      var e = svcEmoji[service] || "✅";
+      botSay("Por lo que me cuentas, esto corresponde a:\n\n" + e + " " + service + "\n\nJuan puede ayudarte con eso. ¿Quieres que te conecte?", function(){
+        setChips([
+          {label:"👍 Sí, adelante",          action:function(){ pickNeed(service); }},
+          {label:"📋 Ver otros servicios",    action:function(){ botSay(respuestas.servicios, menuChips); }}
+        ]);
+      });
+    }
+
     function freeText(txt){
       addMsg(txt, "user");
       var t = txt.toLowerCase();
-      if (/(hola|buenas|saludos|hey|qué tal|que tal)/.test(t))                           { botSay("¡Hola! 👋 ¿En qué te ayudo?", menuChips); return; }
-      if (/(precio|costo|cuánto|cuanto|cotiz|tarifa|tiempo|cuándo|cuando)/.test(t))       { botSay(respuestas.precios, menuChips); return; }
-      if (/(whatsapp|contact|hablar|llamar|correo|email|escribir)/.test(t))              { startContacto(); return; }
-      if (/(proceso|cómo trabaj|como trabaj|pasos|garant)/.test(t))                      { botSay(respuestas.proceso, menuChips); return; }
-      if (/(servicio|hace|ofrec|\bia\b|inteligencia|dato|software|soporte|app|sistema|web|p[aá]gina|dashboard)/.test(t)){ botSay(respuestas.servicios, menuChips); return; }
-      botSay("Buena pregunta. Para darte una respuesta exacta, lo mejor es hablar directo con Juan. Mientras, elige una opción 👇", menuChips);
+      if (/(hola|buenas|saludos|hey|qué tal|que tal)/.test(t))                                      { botSay("¡Hola! 👋 ¿En qué te ayudo?", menuChips); return; }
+      if (/(qu[eé] (servicio|ofrec|hace|hac[eé]s)|servicios ofrec|lista de servicio|todos los servicio|\bmen[uú]\b)/.test(t)){ botSay(respuestas.servicios, menuChips); return; }
+      if (/(precio|costo|cuánto|cuanto|cotiz|tarifa|cuánto vale|tiempo de entrega|cu[aá]nto tarda)/.test(t))  { botSay(respuestas.precios, menuChips); return; }
+      if (/(proceso|cómo trabaj|como trabaj|pasos|garant)/.test(t))                                 { botSay(respuestas.proceso, menuChips); return; }
+      if (/(whatsapp|contactar|hablar con juan|llamar|correo|email|escribir a juan)/.test(t))       { startContacto(); return; }
+      var svc = detectService(t);
+      if (svc) { suggestService(svc); return; }
+      botSay("Mmm, no estoy 100% seguro de qué servicio encaja con eso 🤔. Lo mejor es que lo hables directo con Juan. Mientras, elige una opción 👇", menuChips);
     }
 
     function start(){
