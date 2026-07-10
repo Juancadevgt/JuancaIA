@@ -456,17 +456,17 @@
     // Detecta el servicio adecuado según lo que describe el usuario
     function detectService(t){
       // 🛠️ Soporte técnico (problemas / fallas de equipo)
-      if (/(contrase|password|no enciend|no prend|no arranca|no inicia|pantalla azul|virus|malware|lent[oa]|se congela|se traba|se apaga|se reinicia|formate|disco duro|\bdisco\b|\bssd\b|memoria ram|\bram\b|reparar|repara|arreglar|descompuso|da[ñn]ad|no funciona|no sirve|impresora|no imprime|\binternet\b|\bred\b|\bwifi\b|\bwindows\b|instalar|reinstalar|mantenimiento|respaldo|backup|no abre|se borr[oó]|recuperar|error\b)/.test(t)) return "Soporte técnico";
+      if (/(contrase|password|no enciend|no prend|no arranca|no inicia|no da imagen|pantalla azul|virus|malware|troyano|hacke|spam|phishing|lent[oa]|va lento|se congela|se traba|se pega|se apaga|se reinicia|se calienta|sobrecalient|formate|disco duro|\bdisco\b|\bssd\b|memoria ram|\bram\b|teclado|mouse|rat[oó]n|monitor|impresora|no imprime|esc[aá]ner|cargador|bater[ií]a|no carga|c[aá]mara|micr[oó]fono|no hay sonido|parlante|driver|controlador|reparar|repara|arreglar|descompuso|da[ñn]ad|no funciona|no sirve|\binternet\b|\bred\b|\bwifi\b|sin se[ñn]al|\bwindows\b|\boffice\b|outlook|reinstalar|configur|mantenimiento|limpieza de|respaldo|backup|no abre|se borr[oó]|recuperar|cuenta bloqueada|no puedo entrar|no me deja entrar|olvid[eé]|error\b)/.test(t)) return "Soporte técnico";
       // 🤖 Inteligencia Artificial
-      if (/(chatbot|\bbot\b|inteligencia artificial|\bia\b|chatgpt|claude|automatiz|predict|machine learning|modelo de|asistente virtual)/.test(t)) return "Inteligencia Artificial";
+      if (/(inteligencia artificial|\bia\b|robot|rob[oó]tica|\bbot\b|chat ?bot|agente|agentes|chatgpt|\bgpt\b|claude|gemini|copilot|automatiz|predict|pron[oó]stico|machine learning|deep learning|red neuronal|redes neuronales|\bnlp\b|\bocr\b|reconocimiento (facial|de voz|de im[aá]gen)|visi[oó]n artificial|asistente virtual|asistente de voz|modelo de ia|generativ|entrenar (un )?modelo|algoritmo)/.test(t)) return "Inteligencia Artificial";
       // 📊 Análisis de datos
-      if (/(dashboard|tablero|reporte|reportes|gr[aá]fic|estad[ií]stic|visualiz|\bkpi\b|indicador|base de datos|analizar (mis )?datos|an[aá]lisis de datos|power bi|m[eé]tricas)/.test(t)) return "Análisis de datos";
-      // 📄 Trámites
-      if (/(tr[aá]mite|papeleo|licencia|permiso|certificad|renovar|renovaci[oó]n|pasaporte|\bdpi\b|\bsat\b|migraci[oó]n|notar[ií]a|legaliz|antecedentes|constancia|solvencia|inscrib|inscripci[oó]n)/.test(t)) return "Trámites";
+      if (/(dashboard|tablero|reporte|reportes|informe|informes|gr[aá]fic|estad[ií]stic|visualiz|\bkpi\b|indicador|m[eé]tricas|base de datos|analizar (mis )?datos|an[aá]lisis de datos|anal[ií]tica|power bi|looker|data studio|\bexcel\b|hoja de c[aá]lculo|tabla din[aá]mica|big data|tendencia|segment|miner[ií]a de datos|cruce de datos|limpiar datos)/.test(t)) return "Análisis de datos";
+      // 📄 Trámites (Guatemala)
+      if (/(tr[aá]mite|papeleo|\bsat\b|\bnit\b|\brtu\b|traspaso|inscrib|inscripci[oó]n|patente|registro mercantil|empresa mercantil|\bigss\b|\brenap\b|\bdpi\b|pasaporte|licencia|permiso|certificad|renovar|renovaci[oó]n|boleto de ornato|solvencia|antecedentes|constancia|\biva\b|\bisr\b|impuesto|declaraci[oó]n|migraci[oó]n|notar[ií]a|legaliz|apostill|\bfel\b)/.test(t)) return "Trámites";
       // 💻 Desarrollo de software
-      if (/(sistema|software|aplicaci[oó]n|\bapp\b|p[aá]gina|sitio web|\bweb\b|inventario|gesti[oó]n|programa|plataforma|ecommerce|tienda en l[ií]nea|\bcrm\b|factura|punto de venta|desarroll|cotizador|agenda|reservas)/.test(t)) return "Desarrollo de software";
+      if (/(sistema|software|aplicaci[oó]n|aplicativo|\bapp\b|p[aá]gina|landing|sitio|portal|\bweb\b|inventario|gesti[oó]n|gestor|programa|plataforma|ecommerce|e-commerce|tienda en l[ií]nea|tienda online|\bcrm\b|\berp\b|factura|facturaci[oó]n|punto de venta|\bpos\b|desarroll|cotizador|agenda|reservas|m[oó]vil|android|\bios\b|\bapi\b|digitaliz|control de|automatizar proceso)/.test(t)) return "Desarrollo de software";
       // 🧭 Consultoría
-      if (/(asesor|consultor|recomiend|qu[eé] tecnolog|no s[eé] qu[eé] necesito|ayuda a elegir|qu[eé] me conviene|orientaci[oó]n|no s[eé] por d[oó]nde)/.test(t)) return "Consultoría en sistemas";
+      if (/(asesor|consultor|recomiend|qu[eé] tecnolog|no s[eé] qu[eé]|ayuda a elegir|ayuda para decidir|qu[eé] me conviene|orientaci[oó]n|no s[eé] por d[oó]nde|por d[oó]nde empiezo|mejorar mi negocio|optimizar mi|estrategia)/.test(t)) return "Consultoría en sistemas";
       return null;
     }
 
@@ -485,11 +485,11 @@
       var t = txt.toLowerCase();
       if (/(hola|buenas|saludos|hey|qué tal|que tal)/.test(t))                                      { botSay("¡Hola! 👋 ¿En qué te ayudo?", menuChips); return; }
       if (/(qu[eé] (servicio|ofrec|hace|hac[eé]s)|servicios ofrec|lista de servicio|todos los servicio|\bmen[uú]\b)/.test(t)){ botSay(respuestas.servicios, menuChips); return; }
-      if (/(precio|costo|cuánto|cuanto|cotiz|tarifa|cuánto vale|tiempo de entrega|cu[aá]nto tarda)/.test(t))  { botSay(respuestas.precios, menuChips); return; }
+      if (/(precio|costo|cu[aá]nto cuesta|cu[aá]nto vale|cotizaci|tarifa|tiempo de entrega|cu[aá]nto tarda)/.test(t))  { botSay(respuestas.precios, menuChips); return; }
       if (/(proceso|cómo trabaj|como trabaj|pasos|garant)/.test(t))                                 { botSay(respuestas.proceso, menuChips); return; }
-      if (/(whatsapp|contactar|hablar con juan|llamar|correo|email|escribir a juan)/.test(t))       { startContacto(); return; }
       var svc = detectService(t);
       if (svc) { lead.problem = txt; suggestService(svc); return; }
+      if (/(whatsapp|contactar|hablar con juan|llamar|correo|email|escribir a juan)/.test(t))       { startContacto(); return; }
       botSay("Mmm, no estoy 100% seguro de qué servicio encaja con eso 🤔. Lo mejor es que lo hables directo con Juan. Mientras, elige una opción 👇", menuChips);
     }
 
