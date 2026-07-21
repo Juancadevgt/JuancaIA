@@ -1,12 +1,12 @@
-# JuancaDev — Landing page
+# Juanca.IA — Landing page
 
-Sitio web de una página del **Ing. Juan Carlos Jimenez "JuancaDev"** — Ingeniero en
+Sitio web de una página del **Ing. Juan Carlos Jimenez "Juanca.IA"** — Ingeniero en
 Sistemas especializado en inteligencia artificial. Ofrece servicios de desarrollo de
 software, análisis de datos, soporte técnico y consultoría TI.
 
 ## 🌐 En vivo
 
-- **Sitio:** https://juancadev-sistemas.vercel.app
+- **Sitio:** https://juanca.ia.vercel.app
 
 ## 🛠️ Tecnología
 
